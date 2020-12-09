@@ -26,34 +26,20 @@ namespace ut5_actv1
         public MainWindow()
         {
             InitializeComponent();
-            platos = new ObservableCollection<Plato>(Plato.GetSamples(@"C:\Users\franc\Google Drive (fj.gil16@iesdoctorbalmis.com)\DAM\segundo\DINT\UD05\ejercicios\ut5_actv1\ut5_actv1_exe\Imagenes"));
+            string rutaActual = System.IO.Path.GetFullPath("..\\..\\");
+            platos = new ObservableCollection<Plato>(Plato.GetSamples(rutaActual+@"\Imagenes"));
             listaPlatos.DataContext = platos;
-            stack.DataContext = platos;
-            
         }
 
         private void ListaPlatos_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if ((Plato)listaPlatos.SelectedItem != null)
             {
-                stack.DataContext = (Plato)listaPlatos.SelectedItem;
+                camposPlatos.DataContext = (Plato)listaPlatos.SelectedItem;
                 tipoComidaComboBox.Text = ((Plato)listaPlatos.SelectedItem).Tipo;
             }
             
         }
-
-        private void CargaDatosEnPanel()
-        {
-            //Plato p = (Plato)listaPlatos.SelectedItem;
-            //nombrePlatoTextBox.Text = p.Nombre;
-            //urlImagenTextBox.Text = p.Imagen;
-            //tipoComidaComboBox.SelectedItem = p.Tipo;
-            //lecheCheckBox.IsChecked = p.Leche;
-            //sojaCheckBox.IsChecked = p.Soja;
-            //glutenCheckBox.IsChecked = p.Gluten;
-            //sulfitosCheckBox.IsChecked = p.Sulfitos;
-        }
-
 
         private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
         {

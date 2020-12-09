@@ -173,7 +173,7 @@
         <DockPanel
             LastChildFill="True">
             <StackPanel
-                x:Name="stack"
+                x:Name="camposPlatos"
                 DockPanel.Dock="Right"
                 Width="250"
                 Background="LightGray"
