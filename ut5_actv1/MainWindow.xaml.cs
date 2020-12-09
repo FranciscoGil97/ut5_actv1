@@ -36,7 +36,7 @@ namespace ut5_actv1
             if ((Plato)listaPlatos.SelectedItem != null)
             {
                 camposPlatos.DataContext = (Plato)listaPlatos.SelectedItem;
-                tipoComidaComboBox.Text = ((Plato)listaPlatos.SelectedItem).Tipo;
+                tipoComidaComboBox.Text = (listaPlatos.SelectedItem as Plato).Tipo;
             }
             
         }
