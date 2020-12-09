@@ -1,0 +1,256 @@
+﻿<Window
+    x:Class="ut5_actv1.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ut5_actv1"
+    mc:Ignorable="d"
+    Title="Comida"
+    Height="450"
+    Width="800"
+    Background="LightBlue"
+    Icon="fruit_food_apple.ico">
+    <Window.Resources>
+        <Style
+            x:Key="iconosAlergenos"
+            TargetType="Image">
+            <Setter
+                Property="Visibility"
+                Value="Collapsed" />
+            <Setter
+                Property="Height"
+                Value="20" />
+            <Setter
+                Property="DockPanel.Dock"
+                Value="Right" />
+
+        </Style>
+
+        <Style
+            x:Key="glutenIcono"
+            TargetType="Image"
+            BasedOn="{StaticResource iconosAlergenos}">
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding Path=Gluten}"
+                    Value="true">
+                    <Setter
+                        Property="Visibility"
+                        Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style
+            x:Key="milkIcono"
+            TargetType="Image"
+            BasedOn="{StaticResource iconosAlergenos}">
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding Path=Leche}"
+                    Value="true">
+                    <Setter
+                        Property="Visibility"
+                        Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style
+            x:Key="sojaIcono"
+            TargetType="Image"
+            BasedOn="{StaticResource iconosAlergenos}">
+
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding Path=Soja}"
+                    Value="true">
+                    <Setter
+                        Property="Visibility"
+                        Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style
+            x:Key="sulfitoIcono"
+            TargetType="Image"
+            BasedOn="{StaticResource iconosAlergenos}">
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding Path=Sulfitos}"
+                    Value="true">
+                    <Setter
+                        Property="Visibility"
+                        Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <local:BanderaConverter
+            x:Key="conversorBandera"></local:BanderaConverter>
+        <local:NombrePlatoConversor
+            x:Key="conversorNombre" />
+        <Style
+            x:Key="americanaCombo"
+            TargetType="ComboBoxItem">
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding Path=Tipo}"
+                    Value="True">
+                    <Setter
+                        Property="IsSelected"
+                        Value="True" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate
+            x:Key="pantillaPlatos">
+            <Border
+                BorderBrush="Black"
+                BorderThickness="1"
+                Margin="15"
+                Background="White"
+                Height="300"
+                Width="250">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="2"
+                        ShadowDepth="8" />
+                </Border.Effect>
+                <DockPanel
+                    LastChildFill="True">
+                    <Viewbox
+                        Height="60"
+                        Width="200"
+                        DockPanel.Dock="Top">
+                        <TextBlock
+                            Text="{Binding Nombre}"
+                            FontFamily="{Binding Path=Tipo, Converter={StaticResource conversorNombre}}"
+                            FontSize="40"
+                            HorizontalAlignment="Center" />
+                    </Viewbox>
+                    <DockPanel
+                        LastChildFill="False"
+                        DockPanel.Dock="Bottom"
+                        Margin="16,5">
+                        <Image
+                            x:Name="banderaImage"
+                            Height="40"
+                            DockPanel.Dock="Left"
+                            Source="{Binding Path=Tipo, Converter={StaticResource conversorBandera}}" />
+                        <Image
+                            x:Name="sojaIconoImage"
+                            Style="{StaticResource sojaIcono}"
+                            Source="/soybean.png" />
+                        <Image
+                            x:Name="sulfideIconoImage"
+                            Style="{StaticResource sulfitoIcono}"
+                            Source="/sulfide.png" />
+                        <Image
+                            x:Name="milkIconoImage"
+                            Style="{StaticResource milkIcono}"
+                            Source="/milk.png" />
+                        <Image
+                            x:Name="glutenIconoImage"
+                            Style="{StaticResource glutenIcono}"
+                            Source="/gluten.png" />
+                    </DockPanel>
+                    <Image
+                        Stretch="UniformToFill"
+                        Source="{Binding Imagen}"
+                        Margin="15" />
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Border
+        BorderBrush="Black"
+        BorderThickness="2"
+        Margin="5"
+        Background="White">
+        <DockPanel
+            LastChildFill="True">
+            <StackPanel
+                x:Name="stack"
+                DockPanel.Dock="Right"
+                Width="250"
+                Background="LightGray"
+                Margin="10">
+                <TextBlock
+                    Text="Nombre del plato"
+                    Margin="8,0" />
+                <TextBox
+                    x:Name="nombrePlatoTextBox"
+                    Margin="8,0"
+                    Text="{Binding Path=Nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock
+                    Margin="8,8,8,0"
+                    Text="Foto del plato" />
+                <TextBox
+                    x:Name="urlImagenTextBox"
+                    Margin="8,0"
+                    Height="80"
+                    Text="{Binding Path=Imagen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="Wrap"/>
+                <TextBlock
+                    Margin="8,8,8,0"
+                    Text="Tipo de comida" />
+                <ComboBox
+                    x:Name="tipoComidaComboBox"
+                    Margin="8,0">
+                    <ComboBoxItem
+                        Selected="ComboBoxItem_Selected">Americana</ComboBoxItem>
+                    <ComboBoxItem
+                        Selected="ComboBoxItem_Selected">Mexicana</ComboBoxItem>
+                    <ComboBoxItem
+                        Selected="ComboBoxItem_Selected">China</ComboBoxItem>
+                </ComboBox>
+                <GroupBox
+                    Margin="8"
+                    Header="Alégenos"
+                    BorderBrush="Black"
+                    Height="80">
+                    <UniformGrid>
+                        <CheckBox
+                            x:Name="lecheCheckBox"
+                            Content="Leche"
+                            Margin="5"
+                            IsChecked="{Binding Path=Leche, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <CheckBox
+                            x:Name="sojaCheckBox"
+                            Content="Soja"
+                            Margin="5"
+                            IsChecked="{Binding Path=Soja, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <CheckBox
+                            x:Name="glutenCheckBox"
+                            Content="Gluten"
+                            Margin="5"
+                            IsChecked="{Binding Path=Gluten, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <CheckBox
+                            x:Name="sulfitosCheckBox"
+                            Content="Sulfitos"
+                            Margin="5"
+                            IsChecked="{Binding Path=Sulfitos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </UniformGrid>
+                </GroupBox>
+            </StackPanel>
+            <ListBox
+                x:Name="listaPlatos"
+                Margin="10"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ItemsSource="{Binding}"
+                ItemTemplate="{StaticResource pantillaPlatos}"
+                MouseLeftButtonUp="ListaPlatos_MouseLeftButtonUp">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+            </ListBox>
+        </DockPanel>
+    </Border>
+
+</Window>
