@@ -1,14 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 
 namespace Comida
 {
-    class Plato : INotifyPropertyChanged
+    public class Plato : INotifyPropertyChanged
     {
         private string nombre;
         private string imagen;

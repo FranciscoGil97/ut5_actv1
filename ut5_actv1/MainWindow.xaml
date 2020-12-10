@@ -184,7 +184,7 @@
                 <TextBox
                     x:Name="nombrePlatoTextBox"
                     Margin="8,0"
-                    Text="{Binding Path=Nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding Path=Nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock
                     Margin="8,8,8,0"
                     Text="Foto del plato" />
@@ -193,20 +193,16 @@
                     Margin="8,0"
                     Height="80"
                     Text="{Binding Path=Imagen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    TextWrapping="Wrap"/>
+                    TextWrapping="Wrap" />
                 <TextBlock
                     Margin="8,8,8,0"
                     Text="Tipo de comida" />
+                
                 <ComboBox
                     x:Name="tipoComidaComboBox"
-                    Margin="8,0">
-                    <ComboBoxItem
-                        Selected="ComboBoxItem_Selected">Americana</ComboBoxItem>
-                    <ComboBoxItem
-                        Selected="ComboBoxItem_Selected">Mexicana</ComboBoxItem>
-                    <ComboBoxItem
-                        Selected="ComboBoxItem_Selected">China</ComboBoxItem>
-                </ComboBox>
+                    SelectedItem="{Binding Path=Tipo}"
+                    Margin="8,0" />
+
                 <GroupBox
                     Margin="8"
                     Header="Alégenos"
@@ -242,7 +238,7 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding}"
                 ItemTemplate="{StaticResource pantillaPlatos}"
-                MouseLeftButtonUp="ListaPlatos_MouseLeftButtonUp">
+                SelectionChanged="ListaPlatos_SelectionChanged">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel></WrapPanel>
