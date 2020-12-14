@@ -38,6 +38,9 @@
                     <Setter
                         Property="Visibility"
                         Value="Visible" />
+                    <Setter
+                        Property="ToolTip"
+                        Value="Gluten" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -53,6 +56,9 @@
                     <Setter
                         Property="Visibility"
                         Value="Visible" />
+                    <Setter
+                        Property="ToolTip"
+                        Value="Leche" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -69,6 +75,9 @@
                     <Setter
                         Property="Visibility"
                         Value="Visible" />
+                    <Setter
+                        Property="ToolTip"
+                        Value="Soja" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -84,7 +93,11 @@
                     <Setter
                         Property="Visibility"
                         Value="Visible" />
+                    <Setter
+                        Property="ToolTip"
+                        Value="Sulfitos" />
                 </DataTrigger>
+
             </Style.Triggers>
         </Style>
         <local:BanderaConverter
@@ -188,16 +201,19 @@
                 <TextBlock
                     Margin="8,8,8,0"
                     Text="Foto del plato" />
-                <TextBox
-                    x:Name="urlImagenTextBox"
-                    Margin="8,0"
-                    Height="80"
-                    Text="{Binding Path=Imagen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    TextWrapping="Wrap" />
+                <WrapPanel >
+                    <TextBox
+                        Width="232"
+                        x:Name="urlImagenTextBox"
+                        Margin="8,0"
+                        Text="{Binding Path=Imagen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap" />
+
+                </WrapPanel>
                 <TextBlock
                     Margin="8,8,8,0"
                     Text="Tipo de comida" />
-                
+
                 <ComboBox
                     x:Name="tipoComidaComboBox"
                     SelectedItem="{Binding Path=Tipo}"
